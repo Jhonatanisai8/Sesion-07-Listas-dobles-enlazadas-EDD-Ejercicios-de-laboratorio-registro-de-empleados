@@ -329,6 +329,11 @@ public class frmEmpleados extends javax.swing.JFrame {
         btnAdelanteAtras.setText("Adelante-Atras");
 
         btnActualiza.setText("Actualizar");
+        btnActualiza.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizaActionPerformed(evt);
+            }
+        });
 
         btnEliminar.setText("Eliminar");
 
@@ -514,6 +519,20 @@ public class frmEmpleados extends javax.swing.JFrame {
         verDatos(1);
         resumen();
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnActualizaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizaActionPerformed
+
+        //colocando la informacion den el puntero pFound
+        pFound.codigo = txtCodigo.getText();
+        pFound.nombre = txtNombre.getText().toUpperCase();
+        pFound.apellidos = txtApellidos.getText().toUpperCase();
+        pFound.sexo = cbxSexo.getSelectedItem().toString();
+        pFound.sueldo = Float.parseFloat(txtSueldo.getText());
+        limpiarCampos();
+        desabilitar();
+        verDatos(1);
+        resumen();
+    }//GEN-LAST:event_btnActualizaActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
