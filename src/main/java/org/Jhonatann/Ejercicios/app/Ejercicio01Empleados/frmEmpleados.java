@@ -13,9 +13,9 @@ public class frmEmpleados extends javax.swing.JFrame {
     DefaultTableModel miModelo;
     String[] cabezera = {"Nº", "Codigo", "Nombres", "Apellidos", "Sexo", "Sueldo"};
     String[][] data = {};
-    
+
     public class Nodo {
-        
+
         String codigo;
         String nombre;
         String apellidos;
@@ -23,7 +23,7 @@ public class frmEmpleados extends javax.swing.JFrame {
         float sueldo;
         Nodo sig;
         Nodo ant;
-        
+
         public Nodo(String codigo, String nombre, String apellidos, String sexo, float sueldo) {
             this.codigo = codigo;
             this.nombre = nombre;
@@ -37,7 +37,7 @@ public class frmEmpleados extends javax.swing.JFrame {
     public Nodo ini, fin;
     public Nodo pFound;
     int num = 0;
-    
+
     public frmEmpleados() {
         initComponents();
         ini = fin = pFound = null;
@@ -51,7 +51,7 @@ public class frmEmpleados extends javax.swing.JFrame {
         String nom = "", acum = "";
         float suma = 0, mayor = -9999;
         float s;
-        
+
         while (aux != null) {
             s = aux.sueldo;
             if (s > mayor) {
@@ -68,19 +68,19 @@ public class frmEmpleados extends javax.swing.JFrame {
         acum = df2.format(suma);
         txtMontoSueldoAcumulado.setText(acum);
     }
-    
+
     void habilitar() {
         btnActualiza.setEnabled(true);
         btnEliminar.setEnabled(true);
         btnGuardar.setEnabled(false);
     }
-    
+
     void desabilitar() {
         btnActualiza.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnGuardar.setEnabled(true);
     }
-    
+
     void limpiarCampos() {
         String m = "";
         txtApellidos.setText(m);
@@ -90,7 +90,7 @@ public class frmEmpleados extends javax.swing.JFrame {
         txtCodigo.requestFocus();
         cbxSexo.setSelectedIndex(0);
     }
-    
+
     void vaciarTabla() {
         //obtenemos el numero de filas de las tablas
         int filas = tblDatos.getRowCount();
@@ -98,7 +98,54 @@ public class frmEmpleados extends javax.swing.JFrame {
             miModelo.removeRow(0);
         }
     }
-    
+
+    void verDatos(int ind) {
+        //variables para recorrer la lista
+        String cod, nom, ape, se, su;
+        float s;
+        switch (ind) {
+            case 1: {
+                vaciarTabla();
+                Nodo aux = ini;
+                num = 0;
+                while (aux != null) {
+                    cod = aux.codigo;
+                    nom = aux.nombre;
+                    ape = aux.apellidos;
+                    se = aux.sexo;
+
+                    //dando un formato al sueldo
+                    DecimalFormat df2 = new DecimalFormat("####.00");
+                    su = df2.format(aux.sueldo);
+                    num++;
+                    Object[] fila = {num, cod, nom, ape, se, su};
+                    miModelo.addRow(fila);
+                    aux = aux.sig;
+                }
+            }
+            break;
+            case 2: {
+                vaciarTabla();
+                Nodo aux = fin;
+                num = 0;
+                while (aux != null) {
+                    cod = aux.codigo;
+                    nom = aux.nombre;
+                    ape = aux.apellidos;
+                    se = aux.sexo;
+                    //le damos formato al sueldo
+                    DecimalFormat df2 = new DecimalFormat("####.00");
+                    su = df2.format(aux.sueldo);
+                    num++;
+                    Object fila[] = {num, cod, nom, ape, se, su};
+                    miModelo.addRow(fila);
+                    aux = aux.ant;
+                }
+                break;
+            }
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
