@@ -13,9 +13,9 @@ public class frmEmpleados extends javax.swing.JFrame {
     DefaultTableModel miModelo;
     String[] cabezera = {"Nº", "Codigo", "Nombres", "Apellidos", "Sexo", "Sueldo"};
     String[][] data = {};
-
+    
     public class Nodo {
-
+        
         String codigo;
         String nombre;
         String apellidos;
@@ -23,7 +23,7 @@ public class frmEmpleados extends javax.swing.JFrame {
         float sueldo;
         Nodo sig;
         Nodo ant;
-
+        
         public Nodo(String codigo, String nombre, String apellidos, String sexo, float sueldo) {
             this.codigo = codigo;
             this.nombre = nombre;
@@ -37,7 +37,7 @@ public class frmEmpleados extends javax.swing.JFrame {
     public Nodo ini, fin;
     public Nodo pFound;
     int num = 0;
-
+    
     public frmEmpleados() {
         initComponents();
         ini = fin = pFound = null;
@@ -51,7 +51,7 @@ public class frmEmpleados extends javax.swing.JFrame {
         String nom = "", acum = "";
         float suma = 0, mayor = -9999;
         float s;
-
+        
         while (aux != null) {
             s = aux.sueldo;
             if (s > mayor) {
@@ -68,19 +68,37 @@ public class frmEmpleados extends javax.swing.JFrame {
         acum = df2.format(suma);
         txtMontoSueldoAcumulado.setText(acum);
     }
-
+    
     void habilitar() {
         btnActualiza.setEnabled(true);
         btnEliminar.setEnabled(true);
         btnGuardar.setEnabled(false);
     }
-
+    
     void desabilitar() {
         btnActualiza.setEnabled(false);
         btnEliminar.setEnabled(false);
         btnGuardar.setEnabled(true);
     }
-
+    
+    void limpiarCampos() {
+        String m = "";
+        txtApellidos.setText(m);
+        txtCodigo.setText(m);
+        txtNombre.setText(m);
+        txtSueldo.setText(m);
+        txtCodigo.requestFocus();
+        cbxSexo.setSelectedIndex(0);
+    }
+    
+    void vaciarTabla() {
+        //obtenemos el numero de filas de las tablas
+        int filas = tblDatos.getRowCount();
+        for (int i = 0; i < filas; i++) {
+            miModelo.removeRow(0);
+        }
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
