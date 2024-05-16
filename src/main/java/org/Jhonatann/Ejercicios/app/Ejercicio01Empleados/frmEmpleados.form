@@ -308,6 +308,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Adelante-Atras"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdelanteAtrasActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnActualiza">
               <Properties>
@@ -329,6 +332,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Atras-Adelante"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAtrasAdelanteActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnSalir">
               <Properties>
@@ -339,6 +345,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Restaurar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRestaurarActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

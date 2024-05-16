@@ -333,6 +333,11 @@ public class frmEmpleados extends javax.swing.JFrame {
         });
 
         btnAdelanteAtras.setText("Adelante-Atras");
+        btnAdelanteAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdelanteAtrasActionPerformed(evt);
+            }
+        });
 
         btnActualiza.setText("Actualizar");
         btnActualiza.addActionListener(new java.awt.event.ActionListener() {
@@ -349,10 +354,20 @@ public class frmEmpleados extends javax.swing.JFrame {
         });
 
         btnAtrasAdelante.setText("Atras-Adelante");
+        btnAtrasAdelante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasAdelanteActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
 
         btnRestaurar.setText("Restaurar");
+        btnRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestaurarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -578,6 +593,19 @@ public class frmEmpleados extends javax.swing.JFrame {
         desabilitar();
         resumen();
     }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
+        limpiarCampos();
+        desabilitar();
+    }//GEN-LAST:event_btnRestaurarActionPerformed
+
+    private void btnAdelanteAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdelanteAtrasActionPerformed
+        verDatos(1);
+    }//GEN-LAST:event_btnAdelanteAtrasActionPerformed
+
+    private void btnAtrasAdelanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasAdelanteActionPerformed
+        verDatos(2);
+    }//GEN-LAST:event_btnAtrasAdelanteActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
