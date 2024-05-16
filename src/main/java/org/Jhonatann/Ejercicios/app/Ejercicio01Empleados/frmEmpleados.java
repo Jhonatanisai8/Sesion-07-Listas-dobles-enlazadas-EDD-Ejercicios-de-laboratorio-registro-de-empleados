@@ -1,14 +1,18 @@
 package org.Jhonatann.Ejercicios.app.Ejercicio01Empleados;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Jhonatan
  */
 public class frmEmpleados extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmEmpleados
-     */
+    //declaramos el formato de las tablas
+    DefaultTableModel miModelo;
+    String[] cabezera = {"Nº", "Codigo", "Nombres", "Apellidos", "Sexo", "Sueldo"};
+    String[][] data = {};
+
     public frmEmpleados() {
         initComponents();
     }
