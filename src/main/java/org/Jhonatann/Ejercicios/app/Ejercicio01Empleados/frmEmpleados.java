@@ -146,6 +146,35 @@ public class frmEmpleados extends javax.swing.JFrame {
         }
     }
 
+    void eliminar() {
+        Nodo actual;
+        boolean encontrado = false;
+        actual = ini;
+        while ((actual != null) && (!encontrado)) {
+            encontrado = actual.codigo.equalsIgnoreCase(txtCodigo.getText().trim());
+            if (!encontrado) {
+                actual = actual.sig;
+            }
+        }
+
+        //realizando los enlaces
+        if (actual != null) {
+            if (actual == ini) {
+                ini = actual.sig;
+                if (encontrado) {
+                    actual.sig.ant = null;
+                }
+            } else if (actual.sig != null) {
+                actual.ant.sig = actual.sig;
+                actual.sig.ant = actual.ant;
+            } else {
+                actual.ant.sig = null;
+                fin = actual.ant;
+            }
+            actual = null;
+        }
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
