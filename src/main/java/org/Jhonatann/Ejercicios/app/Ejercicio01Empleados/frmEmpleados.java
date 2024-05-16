@@ -1,6 +1,7 @@
 package org.Jhonatann.Ejercicios.app.Ejercicio01Empleados;
 
 import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -325,6 +326,11 @@ public class frmEmpleados extends javax.swing.JFrame {
         });
 
         btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
 
         btnAdelanteAtras.setText("Adelante-Atras");
 
@@ -533,6 +539,29 @@ public class frmEmpleados extends javax.swing.JFrame {
         verDatos(1);
         resumen();
     }//GEN-LAST:event_btnActualizaActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+
+        String cod = txtCodigo.getText();
+        if (cod.equalsIgnoreCase("")) {
+            JOptionPane.showMessageDialog(rootPane, "Ingresa el codigo a busacar", "ATENCION", 3);
+        } else {
+            pFound = buscar(ini, cod);
+            //verificando el primer pFound para mostrar la informacion buscada
+            if (pFound != null) {
+                txtNombre.setText(pFound.nombre);
+                txtApellidos.setText(pFound.apellidos);
+                if (pFound.sexo.equalsIgnoreCase("MASCULINO")) {
+                    cbxSexo.setSelectedIndex(2);
+                } else {
+                    cbxSexo.setSelectedIndex(1);
+                }
+                txtSueldo.setText(pFound.sueldo + "");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "El codigo: " + cod + ", no esta en los registros", "ATENCION", 3);
+            }
+        }
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
