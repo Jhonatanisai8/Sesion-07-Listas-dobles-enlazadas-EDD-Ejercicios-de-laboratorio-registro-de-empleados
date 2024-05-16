@@ -13,6 +13,27 @@ public class frmEmpleados extends javax.swing.JFrame {
     String[] cabezera = {"Nº", "Codigo", "Nombres", "Apellidos", "Sexo", "Sueldo"};
     String[][] data = {};
 
+    public class Nodo {
+
+        String codigo;
+        String nombre;
+        String apellidos;
+        String sexo;
+        float sueldo;
+        Nodo sig;
+        Nodo ant;
+
+        public Nodo(String codigo, String nombre, String apellidos, String sexo, float sueldo) {
+            this.codigo = codigo;
+            this.nombre = nombre;
+            this.apellidos = apellidos;
+            this.sexo = sexo;
+            this.sueldo = sueldo;
+            sig = ant = null;
+        }
+    }
+    //declaracion de variables locales
+
     public frmEmpleados() {
         initComponents();
     }
