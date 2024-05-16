@@ -234,6 +234,11 @@ public class frmEmpleados extends javax.swing.JFrame {
         txtMontoSueldoAcumulado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Registro de Empleados");
@@ -246,7 +251,7 @@ public class frmEmpleados extends javax.swing.JFrame {
 
         jLabel5.setText("Sexo:");
 
-        cbxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbxSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "=Seleccionar=", "Masculino", "Femenino" }));
 
         jLabel6.setText("Sueldo:");
 
@@ -538,6 +543,7 @@ public class frmEmpleados extends javax.swing.JFrame {
         String apel = txtApellidos.getText();
         String sex = cbxSexo.getSelectedItem().toString();
         String suel = txtSueldo.getText();
+        //creando el nodo  de la lista en memoria y co
 
         //creando el nodo  de la lista en memoria y colocando la informacion 
         ini = insertarFinal(ini, cod, nomb, apel, sex, Float.parseFloat(suel));
@@ -577,6 +583,7 @@ public class frmEmpleados extends javax.swing.JFrame {
                     cbxSexo.setSelectedIndex(1);
                 }
                 txtSueldo.setText(pFound.sueldo + "");
+                habilitar();
             } else {
                 JOptionPane.showMessageDialog(rootPane, "El codigo: " + cod + ", no esta en los registros", "ATENCION", 3);
             }
@@ -606,6 +613,10 @@ public class frmEmpleados extends javax.swing.JFrame {
     private void btnAtrasAdelanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasAdelanteActionPerformed
         verDatos(2);
     }//GEN-LAST:event_btnAtrasAdelanteActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        desabilitar();
+    }//GEN-LAST:event_formWindowOpened
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
