@@ -33,9 +33,15 @@ public class frmEmpleados extends javax.swing.JFrame {
         }
     }
     //declaracion de variables locales
+    public Nodo ini, fin;
+    public Nodo pFound;
+    int num = 0;
 
     public frmEmpleados() {
         initComponents();
+        ini = fin = pFound = null;
+        miModelo = new DefaultTableModel(data, cabezera);
+        tblDatos.setModel(miModelo);
     }
 
     /**
