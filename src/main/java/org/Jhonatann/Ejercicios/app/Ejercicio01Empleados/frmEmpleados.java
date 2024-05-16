@@ -501,7 +501,18 @@ public class frmEmpleados extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        //capturando los datos de los empleados
+        String cod = txtCodigo.getText();
+        String nomb = txtNombre.getText();
+        String apel = txtApellidos.getText();
+        String sex = cbxSexo.getSelectedItem().toString();
+        String suel = txtSueldo.getText();
 
+        //creando el nodo  de la lista en memoria y colocando la informacion 
+        ini = insertarFinal(ini, cod, nomb, apel, sex, Float.parseFloat(suel));
+        limpiarCampos();
+        verDatos(1);
+        resumen();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     public static void main(String args[]) {
