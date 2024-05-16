@@ -45,6 +45,28 @@ public class frmEmpleados extends javax.swing.JFrame {
         tblDatos.setModel(miModelo);
     }
 
+    Nodo buscar(Nodo inicio, String codigo) {
+        Nodo pos = inicio;
+        while (pos != null && !codigo.equalsIgnoreCase(pos.codigo)) {
+            pos = pos.sig;
+        }
+        return pos;
+    }
+
+    Nodo insertarFinal(Nodo inicio, String cod, String nombre, String apelli, String sexo, float suel) {
+        Nodo nuevo = new Nodo(cod, nombre, apelli, sexo, suel);
+        nuevo.sig = inicio;
+        if (inicio == null) {
+            fin = nuevo;
+            fin.sig = null;
+        }
+        if (inicio != null) {
+            inicio.ant = nuevo;
+        }
+        inicio = nuevo;
+        return inicio;
+    }
+
     //metodo ver resumen
     void resumen() {
         Nodo aux = ini;
@@ -296,6 +318,11 @@ public class frmEmpleados extends javax.swing.JFrame {
         );
 
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnConsultar.setText("Consultar");
 
@@ -472,6 +499,10 @@ public class frmEmpleados extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
