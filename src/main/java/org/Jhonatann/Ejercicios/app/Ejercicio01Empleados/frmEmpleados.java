@@ -342,6 +342,11 @@ public class frmEmpleados extends javax.swing.JFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnAtrasAdelante.setText("Atras-Adelante");
 
@@ -562,6 +567,17 @@ public class frmEmpleados extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        eliminar();
+        limpiarCampos();
+        verDatos(1);
+        if (ini == null) {
+            JOptionPane.showMessageDialog(rootPane, "La lista esta vacia", "ATENCION", 3);
+        }
+        desabilitar();
+        resumen();
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
