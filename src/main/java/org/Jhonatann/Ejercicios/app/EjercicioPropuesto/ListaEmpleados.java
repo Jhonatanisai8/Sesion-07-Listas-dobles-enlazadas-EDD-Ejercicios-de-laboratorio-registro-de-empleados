@@ -76,7 +76,7 @@ public class ListaEmpleados {
                     comisionVentas = aux.getEmpleado().comisionVentas();
                     descSeguro = aux.getEmpleado().descuentoSeguro();
                     desImpuestos = aux.getEmpleado().descuentoImpuesto();
-                    sueldoNeto = aux.getEmpleado().getSueldoBase();
+                    sueldoNeto = aux.getEmpleado().calcularSueldoNeto();
                     numero++;
 
                     Object fila[] = {numero, nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, numHijos,
