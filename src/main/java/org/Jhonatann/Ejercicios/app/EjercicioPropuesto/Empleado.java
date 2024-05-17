@@ -82,4 +82,26 @@ public class Empleado {
         this.numHijos = numHijos;
     }
 
+    //metodos
+    public float comisionVentas() {
+        float comision = this.ventaRealizadas * 0.05f;
+        return comision;
+    }
+
+    public float descuentoSeguro() {
+        float descuentoSeguro = 0;
+        switch (this.estadoCivil) {
+            case "Soltero" ->
+                descuentoSeguro = this.sueldoBase - 100;
+            case "Casado" -> {
+                if (this.numHijos > 0) {
+                    descuentoSeguro = this.sueldoBase - 50 + (this.numHijos * 70);
+                } else {
+                    descuentoSeguro = this.sueldoBase - 120;
+                }
+            }
+        }
+        return descuentoSeguro;
+    }
+
 }
