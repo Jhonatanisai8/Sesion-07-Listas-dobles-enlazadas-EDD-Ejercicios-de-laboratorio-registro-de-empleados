@@ -23,4 +23,9 @@ public class Nodo {
         this.siguiente = siguiente;
         this.anterior = anterior;
     }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
 }
