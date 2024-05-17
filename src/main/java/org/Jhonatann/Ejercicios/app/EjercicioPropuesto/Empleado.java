@@ -15,7 +15,7 @@ public class Empleado {
     private String estadoCivil;
     private int numHijos;
 
-    //contructor
+    //contructor 
     public Empleado(String nombre, String appPaterno, String appMaterno, float sueldoBase, int ventaRealizadas, String estadoCivil, int numHijos) {
         this.nombre = nombre;
         this.appPaterno = appPaterno;
@@ -90,12 +90,14 @@ public class Empleado {
 
     public float descuentoSeguro() {
         float descuentoSeguro = 0;
+        float monto;
         switch (this.estadoCivil) {
             case "Soltero" ->
-                descuentoSeguro = this.sueldoBase - 100;
+                descuentoSeguro = 100;
             case "Casado" -> {
                 if (this.numHijos > 0) {
-                    descuentoSeguro = this.sueldoBase - 50 + (this.numHijos * 70);
+                    monto = ((this.sueldoBase - 50) - (this.numHijos * 70));
+                    descuentoSeguro = this.sueldoBase - monto;
                 } else {
                     descuentoSeguro = this.sueldoBase - 120;
                 }
