@@ -13,6 +13,8 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         "Nº", "NOMBRE", "APP PATERNO", "APP MATERNO", "SLD. BASE", "VENTAS REA", "ESTD. CIVIL", "Nº HIJOS", "COM. VENTAS", "DESC. SEG", "DESC. IMPUSTOS", "SUEL. NETO"};
     String data[][] = {};
 
+    ListaEmpleados listaEmpleados = new ListaEmpleados();
+
     public frmRegistroPersonal() {
         initComponents();
         this.setTitle("Bienvenido al sistema");
@@ -72,22 +74,35 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Calisto MT", 1, 15)); // NOI18N
         jLabel6.setText("Nombres");
 
+        txtNombres.setFont(new java.awt.Font("Simplified Arabic Fixed", 0, 15)); // NOI18N
+
         jLabel11.setFont(new java.awt.Font("Calisto MT", 1, 15)); // NOI18N
         jLabel11.setText("Estado Civil:");
 
+        cbxEstadoCivil.setFont(new java.awt.Font("Simplified Arabic Fixed", 0, 15)); // NOI18N
         cbxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soltero", "Casado" }));
 
         jLabel14.setFont(new java.awt.Font("Calisto MT", 1, 15)); // NOI18N
         jLabel14.setText("Apellido Paterno:");
 
+        txtAppPaterno.setFont(new java.awt.Font("Simplified Arabic Fixed", 0, 15)); // NOI18N
+
         jLabel15.setFont(new java.awt.Font("Calisto MT", 1, 15)); // NOI18N
         jLabel15.setText("Apellido Materno:");
+
+        txtAppMaterno.setFont(new java.awt.Font("Simplified Arabic Fixed", 0, 15)); // NOI18N
 
         jLabel16.setFont(new java.awt.Font("Calisto MT", 1, 15)); // NOI18N
         jLabel16.setText("Sueldo Base:");
 
+        txtSueldoBase.setFont(new java.awt.Font("Simplified Arabic Fixed", 0, 15)); // NOI18N
+
+        txtVentasRealizadas.setFont(new java.awt.Font("Simplified Arabic Fixed", 0, 15)); // NOI18N
+
         jLabel17.setFont(new java.awt.Font("Calisto MT", 1, 15)); // NOI18N
         jLabel17.setText("Ventas Realizadas:");
+
+        txtNumHijos.setFont(new java.awt.Font("Simplified Arabic Fixed", 0, 15)); // NOI18N
 
         jLabel18.setFont(new java.awt.Font("Calisto MT", 1, 15)); // NOI18N
         jLabel18.setText("Nº de Hijos:");
@@ -96,6 +111,7 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         jLabel19.setText("Sueldo Neto:");
 
         txtSueldoNeto.setEditable(false);
+        txtSueldoNeto.setFont(new java.awt.Font("Simplified Arabic Fixed", 0, 15)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -362,7 +378,27 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        String nombre;
+        String appPaterno;
+        String appMaterno;
+        float sueldoBase;
+        int ventaRealizadas;
+        String estadoCivil;
+        int numHijos;
+        //float sueldoNeto;
 
+        //capturamos los datos
+        nombre = txtNombres.getText();
+        appPaterno = txtAppPaterno.getText();
+        appMaterno = txtAppMaterno.getText();
+        sueldoBase = Float.parseFloat(txtSueldoBase.getText());
+        ventaRealizadas = Integer.parseInt(txtVentasRealizadas.getText());
+        estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
+        numHijos = Integer.parseInt(txtNumHijos.getText());
+
+        Empleado empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, numHijos);
+        listaEmpleados.insertarFinal(empleado);
+        listaEmpleados.verDatosTabla(1, modelo, tblDatos);
     }//GEN-LAST:event_btnGuardarActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -395,6 +431,8 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
             }
         });
     }
+    
+   // public void activar
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
