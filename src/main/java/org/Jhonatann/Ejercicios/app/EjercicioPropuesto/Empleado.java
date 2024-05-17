@@ -104,4 +104,31 @@ public class Empleado {
         return descuentoSeguro;
     }
 
+    public float ta() {
+        return this.sueldoBase + comisionVentas();
+    }
+
+    public float descuentoImpuesto() {
+        float montoImpuesto = 0;
+        if (ta() > 0 && ta() < 1500) {
+            montoImpuesto = 0;
+        }
+        if (ta() >= 1500 && ta() <= 2300) {
+            montoImpuesto = ta() * 0.03f;
+        }
+        if (ta() >= 2301 && ta() <= 3000) {
+            montoImpuesto = ta() * 0.04f;
+        }
+        if (ta() >= 3001) {
+            montoImpuesto = ta() * 0.06f;
+        }
+        return montoImpuesto;
+    }
+
+    public float calcularSueldoNeto() {
+        return this.sueldoBase
+                + comisionVentas()
+                - descuentoImpuesto()
+                - descuentoSeguro();
+    }
 }
