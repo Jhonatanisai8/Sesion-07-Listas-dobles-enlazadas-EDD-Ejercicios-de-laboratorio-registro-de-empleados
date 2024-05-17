@@ -42,7 +42,7 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         txtVentasRealizadas = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
         txtNumHijos = new javax.swing.JTextField();
-        jLabel18 = new javax.swing.JLabel();
+        lblHijos = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         txtSueldoNeto = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
@@ -64,6 +64,11 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         txtMontoTotalSeguros = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 1, 15)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -80,7 +85,11 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         jLabel11.setText("Estado Civil:");
 
         cbxEstadoCivil.setFont(new java.awt.Font("Simplified Arabic Fixed", 0, 15)); // NOI18N
-        cbxEstadoCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Soltero", "Casado" }));
+        cbxEstadoCivil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxEstadoCivilActionPerformed(evt);
+            }
+        });
 
         jLabel14.setFont(new java.awt.Font("Calisto MT", 1, 15)); // NOI18N
         jLabel14.setText("Apellido Paterno:");
@@ -103,9 +112,14 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         jLabel17.setText("Ventas Realizadas:");
 
         txtNumHijos.setFont(new java.awt.Font("Simplified Arabic Fixed", 0, 15)); // NOI18N
+        txtNumHijos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumHijosActionPerformed(evt);
+            }
+        });
 
-        jLabel18.setFont(new java.awt.Font("Calisto MT", 1, 15)); // NOI18N
-        jLabel18.setText("Nº de Hijos:");
+        lblHijos.setFont(new java.awt.Font("Calisto MT", 1, 15)); // NOI18N
+        lblHijos.setText("Nº de Hijos:");
 
         jLabel19.setFont(new java.awt.Font("Calisto MT", 1, 15)); // NOI18N
         jLabel19.setText("Sueldo Neto:");
@@ -147,7 +161,7 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtVentasRealizadas, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblHijos, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtNumHijos, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -200,7 +214,7 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblHijos, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel2Layout.createSequentialGroup()
                                         .addGap(2, 2, 2)
                                         .addComponent(txtNumHijos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))))))
@@ -394,12 +408,30 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         sueldoBase = Float.parseFloat(txtSueldoBase.getText());
         ventaRealizadas = Integer.parseInt(txtVentasRealizadas.getText());
         estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
-        numHijos = Integer.parseInt(txtNumHijos.getText());
-
-        Empleado empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, numHijos);
-        listaEmpleados.insertarFinal(empleado);
-        listaEmpleados.verDatosTabla(1, modelo, tblDatos);
+        if (cbxEstadoCivil.getSelectedItem().toString().equalsIgnoreCase("Casado")) {
+            numHijos = Integer.parseInt(txtNumHijos.getText());
+            Empleado empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, numHijos);
+            listaEmpleados.insertarFinal(empleado);
+            listaEmpleados.verDatosTabla(1, modelo, tblDatos);
+        } else {
+            Empleado empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, 0);
+            listaEmpleados.insertarFinal(empleado);
+            listaEmpleados.verDatosTabla(1, modelo, tblDatos);
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        cbxEstadoCivil.addItem("Casado");
+        cbxEstadoCivil.addItem("Soltero");
+        activar("Casado");
+    }//GEN-LAST:event_formWindowOpened
+
+    private void txtNumHijosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumHijosActionPerformed
+    }//GEN-LAST:event_txtNumHijosActionPerformed
+
+    private void cbxEstadoCivilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEstadoCivilActionPerformed
+        activar(cbxEstadoCivil.getSelectedItem().toString());
+    }//GEN-LAST:event_cbxEstadoCivilActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -431,8 +463,16 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
             }
         });
     }
-    
-   // public void activar
+
+    public void activar(String valor) {
+        if (valor.equalsIgnoreCase("Casado")) {
+            txtNumHijos.setVisible(true);
+            lblHijos.setVisible(true);
+        } else {
+            txtNumHijos.setVisible(false);
+            lblHijos.setVisible(false);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
@@ -446,7 +486,6 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -459,6 +498,7 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblHijos;
     private javax.swing.JTable tblDatos;
     private javax.swing.JTextField txtAppMaterno;
     private javax.swing.JTextField txtAppPaterno;
