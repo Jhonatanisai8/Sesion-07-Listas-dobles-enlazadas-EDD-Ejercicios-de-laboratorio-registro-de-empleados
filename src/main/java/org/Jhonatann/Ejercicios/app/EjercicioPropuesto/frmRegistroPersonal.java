@@ -55,6 +55,7 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         btnAtrasAdelante = new javax.swing.JButton();
         btnActualizar = new javax.swing.JButton();
         btnAdelanteAtras = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtMontoTotalSueldo = new javax.swing.JTextField();
@@ -294,21 +295,30 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
             }
         });
 
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(btnGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(52, 52, 52)
+                .addComponent(btnEliminar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnConsultar, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAdelanteAtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAtrasAdelante, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAdelanteAtras, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAtrasAdelante, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
                 .addGap(70, 70, 70))
         );
         jPanel4Layout.setVerticalGroup(
@@ -321,8 +331,9 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
                         .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAdelanteAtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnAtrasAdelante))
-                    .addComponent(btnGuardar))
-                .addContainerGap(8, Short.MAX_VALUE))
+                    .addComponent(btnGuardar)
+                    .addComponent(btnEliminar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("SimSun", 1, 15)); // NOI18N
@@ -401,10 +412,10 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(282, 282, 282)
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(172, 172, 172))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(213, 213, 213)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -546,6 +557,37 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         listaEmpleados.montoTotalPorDescuentoImpuesto(txtMontoTotalImpuestos);
         listaEmpleados.montoTotalPorDescuentoSeguro(txtMontoTotalSeguros);
     }//GEN-LAST:event_btnActualizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        if (listaEmpleados.estaVacia()) {
+            JOptionPane.showMessageDialog(rootPane, "Lista vacia", "ATENCION", 3);
+        } else {
+            if (txtNombres.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(rootPane, "Por favor ingrese el nombre a eliminar", "ATENCION", 3);
+            } else {
+                String nombre;
+                nombre = txtNombres.getText();
+                if (listaEmpleados.eliminarNodoEspecifico(nombre)) {
+                    JOptionPane.showMessageDialog(rootPane, "Empleado ELIMINADO", "ATENCION", 3);
+                    listaEmpleados.verDatosTabla(1, modelo, tblDatos);
+                    limpiarCampos();
+                    //llamamos a los metodos para conocer los montos totales
+                    listaEmpleados.montoTotalPorSueldos(txtMontoTotalSueldo);
+                    listaEmpleados.montoTotalPorComsiones(txtMontoTotalComiones);
+                    listaEmpleados.montoTotalPorDescuentoImpuesto(txtMontoTotalImpuestos);
+                    listaEmpleados.montoTotalPorDescuentoSeguro(txtMontoTotalSeguros);
+                } else {
+                    //llamamos a los metodos para conocer los montos totales
+                    listaEmpleados.montoTotalPorSueldos(txtMontoTotalSueldo);
+                    listaEmpleados.montoTotalPorComsiones(txtMontoTotalComiones);
+                    listaEmpleados.montoTotalPorDescuentoImpuesto(txtMontoTotalImpuestos);
+                    listaEmpleados.montoTotalPorDescuentoSeguro(txtMontoTotalSeguros);
+                    JOptionPane.showMessageDialog(rootPane, "Empleado NO ENCONTRADO", "ATENCION", 3);
+                }
+            }
+        }
+
+    }//GEN-LAST:event_btnEliminarActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -606,6 +648,7 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
     private javax.swing.JButton btnAdelanteAtras;
     private javax.swing.JButton btnAtrasAdelante;
     private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JComboBox<String> cbxEstadoCivil;
     private javax.swing.JLabel jLabel1;
