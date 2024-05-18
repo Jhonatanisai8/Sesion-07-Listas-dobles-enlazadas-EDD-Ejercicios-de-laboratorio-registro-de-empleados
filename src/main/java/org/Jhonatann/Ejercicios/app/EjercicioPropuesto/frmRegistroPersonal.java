@@ -281,6 +281,11 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         });
 
         btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActualizarActionPerformed(evt);
+            }
+        });
 
         btnAdelanteAtras.setText("Adelante-Atras");
         btnAdelanteAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -504,6 +509,43 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        String nombre;
+        String appPaterno;
+        String appMaterno;
+        float sueldoBase;
+        int ventaRealizadas;
+        String estadoCivil;
+        int numHijos;
+        //capturamos los datos
+        nombre = txtNombres.getText();
+        appPaterno = txtAppPaterno.getText();
+        appMaterno = txtAppMaterno.getText();
+        sueldoBase = Float.parseFloat(txtSueldoBase.getText());
+        ventaRealizadas = Integer.parseInt(txtVentasRealizadas.getText());
+        estadoCivil = cbxEstadoCivil.getSelectedItem().toString();
+        if (cbxEstadoCivil.getSelectedItem().toString().equalsIgnoreCase("Casado")) {
+
+            numHijos = Integer.parseInt(txtNumHijos.getText());
+            listaEmpleados.modificarDatos(nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, numHijos);
+            listaEmpleados.verDatosTabla(1, modelo, tblDatos);
+            limpiarCampos();
+
+        } else {
+
+            listaEmpleados.modificarDatos(nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, 0);
+            listaEmpleados.verDatosTabla(1, modelo, tblDatos);
+            listaEmpleados.montoTotalPorSueldos(txtMontoTotalSueldo);
+            limpiarCampos();
+
+        }
+        //llamamos a los metodos para conocer los montos totales
+        listaEmpleados.montoTotalPorSueldos(txtMontoTotalSueldo);
+        listaEmpleados.montoTotalPorComsiones(txtMontoTotalComiones);
+        listaEmpleados.montoTotalPorDescuentoImpuesto(txtMontoTotalImpuestos);
+        listaEmpleados.montoTotalPorDescuentoSeguro(txtMontoTotalSeguros);
+    }//GEN-LAST:event_btnActualizarActionPerformed
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -556,6 +598,7 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
         txtVentasRealizadas.setText(t);
         cbxEstadoCivil.setSelectedIndex(0);
         txtNombres.requestFocus();
+        txtSueldoNeto.setText(t);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
