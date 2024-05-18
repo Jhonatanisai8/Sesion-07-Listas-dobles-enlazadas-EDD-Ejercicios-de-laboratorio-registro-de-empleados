@@ -12,10 +12,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Jhonatan
  */
 public class ListaEmpleados {
-    
+
     private Nodo inicio;
     private Nodo fin;
-    
+
     public ListaEmpleados() {
         inicio = fin = null;
     }
@@ -37,7 +37,7 @@ public class ListaEmpleados {
             inicio = fin = new Nodo(empleado);
         }
     }
-    
+
     private static void vaciarTabla(DefaultTableModel miModelo, JTable tblDatos) {
         //obtenemos el numero de filas de las tablas
         int filas = tblDatos.getRowCount();
@@ -48,7 +48,7 @@ public class ListaEmpleados {
 
     //metodo para ver los datos
     public void verDatosTabla(int ind, DefaultTableModel modelo, JTable tblDatos) {
-        
+
         String nombre;
         String appPaterno;
         String appMaterno;
@@ -60,16 +60,16 @@ public class ListaEmpleados {
         float descSeguro;
         float desImpuestos;
         float sueldoNeto;
-        
+
         int numero = 0;
         switch (ind) {
             case 1: {
                 vaciarTabla(modelo, tblDatos);
                 Nodo aux;
                 aux = inicio;
-                
+
                 while (aux != null) {
-                    
+
                     nombre = aux.getEmpleado().getNombre();
                     appPaterno = aux.getEmpleado().getAppPaterno();
                     appMaterno = aux.getEmpleado().getAppMaterno();
@@ -82,7 +82,7 @@ public class ListaEmpleados {
                     desImpuestos = aux.getEmpleado().descuentoImpuesto();
                     sueldoNeto = aux.getEmpleado().calcularSueldoNeto();
                     numero++;
-                    
+
                     Object fila[] = {numero, nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, numHijos,
                         comisionVentas, descSeguro, desImpuestos, sueldoNeto};
                     modelo.addRow(fila);
@@ -107,7 +107,7 @@ public class ListaEmpleados {
                     desImpuestos = aux.getEmpleado().descuentoImpuesto();
                     sueldoNeto = aux.getEmpleado().calcularSueldoNeto();
                     numero++;
-                    
+
                     Object fila[] = {numero, nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, numHijos,
                         comisionVentas, descSeguro, desImpuestos, sueldoNeto};
                     modelo.addRow(fila);
@@ -165,7 +165,7 @@ public class ListaEmpleados {
         }
         txtMontoTotalSueldo.setText("S/. " + dfc.format(sumaMontoSueldos));
     }
-    
+
     private Nodo buscarEmpleado(String nombre) {
         Nodo pos = inicio;
         while (pos != null && !pos.getEmpleado().getNombre().equalsIgnoreCase(nombre)) {
@@ -173,7 +173,7 @@ public class ListaEmpleados {
         }
         return pos;
     }
-    
+
     public void buscarInformacion(JTextField txtNombres, JTextField txtApePaterno, JTextField txtApeMaterno, JTextField txtVentaRe,
             JTextField txtSueldoBase, JComboBox cbxEstadoCivil, JTextField txtNumHijos, JTextField txtSueldoNeto) {
         Nodo auxiliar = buscarEmpleado(txtNombres.getText().trim());
@@ -189,6 +189,19 @@ public class ListaEmpleados {
             txtSueldoNeto.setText(auxiliar.getEmpleado().calcularSueldoNeto() + "");
         } else {
             JOptionPane.showMessageDialog(null, "Empledo con nombre: " + txtNombres.getText() + ", no encontrado", "ATENCIÓN", 3);
+        }
+    }
+
+    public void modificarDatos(String nombre, String appPaterno, String appMaterno, float sueldoBase, int ventaRealizadas, String estadoCivil, int numHijos) {
+        Nodo aux = buscarEmpleado(nombre);
+        if (aux != null) {
+            aux.getEmpleado().setNombre(nombre);
+            aux.getEmpleado().setAppPaterno(appPaterno);
+            aux.getEmpleado().setAppMaterno(appMaterno);
+            aux.getEmpleado().setSueldoBase(sueldoBase);
+            aux.getEmpleado().setVentaRealizadas(ventaRealizadas);
+            aux.getEmpleado().setEstadoCivil(estadoCivil);
+            aux.getEmpleado().setNumHijos(numHijos);
         }
     }
 }
