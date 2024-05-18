@@ -430,10 +430,12 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
             Empleado empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, numHijos);
             listaEmpleados.insertarFinal(empleado);
             listaEmpleados.verDatosTabla(1, modelo, tblDatos);
+            limpiarCampos();
         } else {
             Empleado empleado = new Empleado(nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, 0);
             listaEmpleados.insertarFinal(empleado);
             listaEmpleados.verDatosTabla(1, modelo, tblDatos);
+            limpiarCampos();
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -497,6 +499,18 @@ public class frmRegistroPersonal extends javax.swing.JFrame {
             txtNumHijos.setVisible(false);
             lblHijos.setVisible(false);
         }
+    }
+
+    public void limpiarCampos() {
+        String t = "";
+        txtAppMaterno.setText(t);
+        txtAppPaterno.setText(t);
+        txtNombres.setText(t);
+        txtNumHijos.setText(t);
+        txtSueldoBase.setText(t);
+        txtVentasRealizadas.setText(t);
+        cbxEstadoCivil.setSelectedIndex(0);
+        txtNombres.requestFocus();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
