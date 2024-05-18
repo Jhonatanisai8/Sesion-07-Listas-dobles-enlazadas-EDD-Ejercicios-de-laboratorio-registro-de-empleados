@@ -204,4 +204,39 @@ public class ListaEmpleados {
             aux.getEmpleado().setNumHijos(numHijos);
         }
     }
+
+    //metodo para eliminar un nodo
+    public boolean eliminarNodoEspecifico(String nombre) {
+        boolean encontrado = false;
+        if (!estaVacia()) {
+            if (inicio == fin && nombre.equalsIgnoreCase(inicio.getEmpleado().getNombre())) {
+                inicio = null;
+                fin = null;
+                encontrado = true;
+            } else if (nombre.equalsIgnoreCase(inicio.getEmpleado().getNombre())) {
+                inicio = inicio.siguiente;
+                inicio.anterior = null;
+                encontrado = true;
+            }
+        } else {
+            Nodo recorrer, temporal;
+            recorrer = inicio;
+            temporal = inicio.siguiente;
+
+            while (recorrer != null && !temporal.getEmpleado().getNombre().equalsIgnoreCase(nombre)) {
+                recorrer = recorrer.siguiente;
+                temporal = temporal.siguiente;
+            }
+            if (temporal != null) {
+                recorrer.siguiente = temporal.siguiente;
+                if (temporal == fin) {
+                    fin = recorrer;
+                } else {
+                    temporal.siguiente.anterior = recorrer;
+                }
+                encontrado = true;
+            }
+        }
+        return encontrado;
+    }
 }
