@@ -87,11 +87,30 @@ public class ListaEmpleados {
             }
             break;
             case 2: {
+                vaciarTabla(modelo, tblDatos);
+                Nodo aux = fin;
+                numero = 0;
+                while (aux != null) {
+                    nombre = aux.getEmpleado().getNombre();
+                    appPaterno = aux.getEmpleado().getAppPaterno();
+                    appMaterno = aux.getEmpleado().getAppMaterno();
+                    sueldoBase = aux.getEmpleado().getSueldoBase();
+                    ventaRealizadas = aux.getEmpleado().getVentaRealizadas();
+                    estadoCivil = aux.getEmpleado().getEstadoCivil();
+                    numHijos = aux.getEmpleado().getNumHijos();
+                    comisionVentas = aux.getEmpleado().comisionVentas();
+                    descSeguro = aux.getEmpleado().descuentoSeguro();
+                    desImpuestos = aux.getEmpleado().descuentoImpuesto();
+                    sueldoNeto = aux.getEmpleado().calcularSueldoNeto();
+                    numero++;
 
+                    Object fila[] = {numero, nombre, appPaterno, appMaterno, sueldoBase, ventaRealizadas, estadoCivil, numHijos,
+                        comisionVentas, descSeguro, desImpuestos, sueldoNeto};
+                    modelo.addRow(fila);
+                    aux = aux.anterior;
+                }
             }
-
             break;
         }
-
     }
 }
