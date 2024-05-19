@@ -209,34 +209,40 @@ public class ListaEmpleados {
     public boolean eliminarNodoEspecifico(String nombre) {
         boolean encontrado = false;
         if (!estaVacia()) {
-            if (inicio == fin && nombre.equalsIgnoreCase(inicio.getEmpleado().getNombre())) {
+            if (inicio == fin && inicio.getEmpleado().getNombre().equalsIgnoreCase(nombre)) {
+                // Caso: Solo hay un nodo y es el que queremos eliminar.
                 inicio = null;
                 fin = null;
                 encontrado = true;
             } else if (nombre.equalsIgnoreCase(inicio.getEmpleado().getNombre())) {
+                //el nodo a eliminar es el primero.
                 inicio = inicio.siguiente;
-                inicio.anterior = null;
-                encontrado = true;
-            }
-        } else {
-            Nodo recorrer, temporal;
-            recorrer = inicio;
-            temporal = inicio.siguiente;
-
-            while (recorrer != null && !temporal.getEmpleado().getNombre().equalsIgnoreCase(nombre)) {
-                recorrer = recorrer.siguiente;
-                temporal = temporal.siguiente;
-            }
-            if (temporal != null) {
-                recorrer.siguiente = temporal.siguiente;
-                if (temporal == fin) {
-                    fin = recorrer;
-                } else {
-                    temporal.siguiente.anterior = recorrer;
+                if (inicio != null) {
+                    inicio.anterior = null;
                 }
                 encontrado = true;
+            } else {
+                // el nodo a eliminar está en medio o al final.
+                Nodo recorrer = inicio.siguiente; // Empezamos desde el segundo nodo
+                while (recorrer != null && !recorrer.getEmpleado().getNombre().equalsIgnoreCase(nombre)) {
+                    recorrer = recorrer.siguiente;
+                }
+                if (recorrer != null) {
+                    //encontramos  el nodo a eliminar.
+                    if (recorrer == fin) {
+                        // el nodo a eliminar es el último.
+                        fin = recorrer.anterior;
+                        fin.siguiente = null;
+                    } else {
+                        //el nodo a eliminar está en medio.
+                        recorrer.anterior.siguiente = recorrer.siguiente;
+                        recorrer.siguiente.anterior = recorrer.anterior;
+                    }
+                    encontrado = true;
+                }
             }
         }
         return encontrado;
     }
+
 }
